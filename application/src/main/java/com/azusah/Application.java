@@ -1,13 +1,12 @@
-package com.azusah.sales_api;
+package com.azusah;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SalesApiApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SalesApiApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
-
 }
