@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.azusah</groupId>
-	<artifactId>sales-api</artifactId>
+	<artifactId>sales-manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sales-api</name>
+    <packaging>pom</packaging>
+    <name>sales-api</name>
 	<description>Example of a Sales Control application.</description>
 	<url/>
 	<licenses>
@@ -20,7 +21,10 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <modules>
+        <module>customer-api</module>
+    </modules>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
