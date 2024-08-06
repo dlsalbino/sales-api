@@ -1,7 +1,7 @@
 package com.azusah.usecase;
 
 import com.azusah.domain.entity.Customer;
-import com.azusah.usecase.impl.AddCustomerUseCaseImpl;
+import com.azusah.usecase.impl.CreateCustomerUseCaseImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class AddCustomerUseCaseTest {
+public class CreateCustomerUseCaseTest {
 
     @InjectMocks
-    private AddCustomerUseCaseImpl addCustomerUseCase;
+    private CreateCustomerUseCaseImpl addCustomerUseCase;
 
     @Test
     @DisplayName("Given a validated customer data, should return it persisted.")
