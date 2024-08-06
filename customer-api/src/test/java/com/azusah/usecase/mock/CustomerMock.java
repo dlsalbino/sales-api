@@ -7,29 +7,21 @@ import java.math.BigDecimal;
 
 public class CustomerMock {
 
-    public static Customer getCustomerDomain(){
+    public static Customer getCustomerDomain(Long withId){
         return Customer.builder()
-                .name("Daniel")
-                .purchaseLimitValue(new BigDecimal("1000.00"))
-                .invoiceClosingDay(20)
-                .build();
-    }
-    public static Customer getCustomerDomainWithId() {
-        return Customer.builder()
-                .id(1L)
+                .id(withId)
                 .name("Daniel")
                 .purchaseLimitValue(new BigDecimal("1000.00"))
                 .invoiceClosingDay(20)
                 .build();
     }
 
-    public static CustomerEntity getCustomerEntityWithoutId(){
+    public static CustomerEntity getCustomerEntity(Long withId){
         return CustomerEntity.builder()
+                .id(withId)
                 .name("Daniel")
                 .purchaseLimitValue(new BigDecimal("1000.00"))
                 .invoiceClosingDay(20)
                 .build();
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.azusah.service;
 
 import com.azusah.domain.entity.Customer;
+import com.azusah.domain.exception.CustomerNotFoundException;
 import com.azusah.gateway.CustomerPersistenceGateway;
 import com.azusah.infrastructure.mapper.CustomerMapper;
 import com.azusah.repository.CustomerRepository;
@@ -21,5 +22,20 @@ public class CustomerPersistenceGatewayImpl implements CustomerPersistenceGatewa
     @Override
     public Customer create(CustomerEntity customer) {
         return mapper.toCustomerDomainFrom(repository.save(customer));
+    }
+
+    @Override
+    public Customer update(CustomerEntity customer) {
+        CustomerEntity customerEntity = repository.findById(customer.getId())
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id=" + customer.getId() + " not found."));
+
+        var updated = CustomerEntity.builder()
+                .id(customerEntity.getId())
+                .name(customer.getName())
+                .purchaseLimitValue(customer.getPurchaseLimitValue())
+                .invoiceClosingDay(customer.getInvoiceClosingDay())
+                .build();
+
+        return mapper.toCustomerDomainFrom(repository.save(updated));
     }
 }

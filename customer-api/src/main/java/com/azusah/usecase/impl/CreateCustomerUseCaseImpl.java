@@ -4,9 +4,9 @@ import com.azusah.domain.entity.Customer;
 import com.azusah.gateway.CustomerPersistenceGateway;
 import com.azusah.infrastructure.mapper.CustomerMapper;
 import com.azusah.usecase.CreateCustomerUseCase;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CreateCustomerUseCaseImpl implements CreateCustomerUseCase {
 
     private final CustomerPersistenceGateway persistenceGateway;

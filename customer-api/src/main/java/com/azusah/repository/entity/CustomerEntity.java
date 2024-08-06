@@ -3,22 +3,26 @@ package com.azusah.repository.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+
 @Entity
 @Table(name = "customer")
 public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final Long id;
+    private Long id;
 
     @Column(name = "name")
-    private final String name;
+    private String name;
 
     @Column(name = "purchase_limit_value")
-    private final BigDecimal purchaseLimitValue;
+    private BigDecimal purchaseLimitValue;
 
     @Column(name = "invoice_closing_day")
-    private final Integer invoiceClosingDay;
+    private Integer invoiceClosingDay;
+
+    public CustomerEntity() {
+    }
 
     public CustomerEntity(Builder builder) {
         this.id = builder.id;

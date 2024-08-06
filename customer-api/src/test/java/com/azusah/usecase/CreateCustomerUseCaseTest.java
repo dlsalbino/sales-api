@@ -1,7 +1,6 @@
 package com.azusah.usecase;
 
 import com.azusah.domain.entity.Customer;
-import com.azusah.gateway.CustomerPersistenceGateway;
 import com.azusah.infrastructure.mapper.CustomerMapper;
 import com.azusah.repository.entity.CustomerEntity;
 import com.azusah.service.CustomerPersistenceGatewayImpl;
@@ -42,8 +41,8 @@ public class CreateCustomerUseCaseTest {
                 .purchaseLimitValue(new BigDecimal("1000.00"))
                 .invoiceClosingDay(20)
                 .build();
-        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntityWithoutId());
-        when(persistenceGateway.create(any(CustomerEntity.class))).thenReturn(CustomerMock.getCustomerDomainWithId());
+        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntity(null));
+        when(persistenceGateway.create(any(CustomerEntity.class))).thenReturn(CustomerMock.getCustomerDomain(1L));
 
         //when
         Customer customerActual = addCustomerUseCase.execute(customer);
