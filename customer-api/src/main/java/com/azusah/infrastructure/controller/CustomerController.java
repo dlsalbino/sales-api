@@ -2,6 +2,7 @@ package com.azusah.infrastructure.controller;
 
 import com.azusah.domain.entity.Customer;
 import com.azusah.infrastructure.controller.payload.request.CustomerRequest;
+import com.azusah.infrastructure.controller.payload.response.CustomerResponse;
 import com.azusah.infrastructure.mapper.CustomerMapper;
 import com.azusah.usecase.CreateCustomerUseCase;
 import org.slf4j.Logger;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 
 @RestController
@@ -29,10 +29,11 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> create(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest customerRequest) {
         log.info("START :: Creating new customer flow: {}", customerRequest);
         Customer customer = createCustomerUseCase.execute(mapper.toCustomerDomainFrom(customerRequest));
-        log.info("FINISH :: Creating new customer flow: {}", customer);
-        return new ResponseEntity<>(customer, HttpStatus.CREATED);
+        CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
+        log.info("FINISH :: Creating new customer flow: {}", customerResponse);
+        return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
     }
 }
