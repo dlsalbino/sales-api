@@ -8,4 +8,6 @@ public interface CustomerPersistenceGateway {
     Customer create(CustomerEntity customer);
 
     Customer update(CustomerEntity customer);
+
+    Customer findById(Long id);
 }

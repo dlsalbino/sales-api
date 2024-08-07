@@ -5,6 +5,7 @@ import com.azusah.infrastructure.controller.payload.request.CustomerRequest;
 import com.azusah.infrastructure.controller.payload.response.CustomerResponse;
 import com.azusah.infrastructure.mapper.CustomerMapper;
 import com.azusah.usecase.CreateCustomerUseCase;
+import com.azusah.usecase.RetrieveCustomerUseCase;
 import com.azusah.usecase.UpdateCustomerUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +20,14 @@ public class CustomerController {
 
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
     private final CreateCustomerUseCase createCustomerUseCase;
+    private final RetrieveCustomerUseCase retrieveCustomerUseCase;
     private final UpdateCustomerUseCase updateCustomerUseCase;
     private final CustomerMapper mapper;
 
-    public CustomerController(CreateCustomerUseCase createCustomerUseCase, UpdateCustomerUseCase updateCustomerUseCase, CustomerMapper mapper) {
+    public CustomerController(CreateCustomerUseCase createCustomerUseCase, RetrieveCustomerUseCase retrieveCustomerUseCase,
+                              UpdateCustomerUseCase updateCustomerUseCase, CustomerMapper mapper) {
         this.createCustomerUseCase = createCustomerUseCase;
+        this.retrieveCustomerUseCase = retrieveCustomerUseCase;
         this.updateCustomerUseCase = updateCustomerUseCase;
         this.mapper = mapper;
     }
@@ -35,6 +39,15 @@ public class CustomerController {
         CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
         log.info("FINISH :: Creating new customer flow: {}", customerResponse);
         return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerResponse> retrieve(@PathVariable Long id) {
+        log.info("START :: Retrieve customer with id: {}", id);
+        Customer customer = retrieveCustomerUseCase.execute(id);
+        CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
+        log.info("FINISH :: Retrieve customer with id: {}, customer: {}", id, customerResponse);
+        return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
 
     @PutMapping

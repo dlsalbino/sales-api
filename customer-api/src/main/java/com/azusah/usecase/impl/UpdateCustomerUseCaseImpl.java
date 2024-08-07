@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class UpdateCustomerUseCaseImpl implements UpdateCustomerUseCase {
 
-    private final CustomerPersistenceGateway customerPersistenceGateway;
+    private final CustomerPersistenceGateway persistenceGateway;
     private final CustomerMapper mapper;
 
-    public UpdateCustomerUseCaseImpl(CustomerPersistenceGateway customerPersistenceGateway, CustomerMapper mapper) {
-        this.customerPersistenceGateway = customerPersistenceGateway;
+    public UpdateCustomerUseCaseImpl(CustomerPersistenceGateway persistenceGateway, CustomerMapper mapper) {
+        this.persistenceGateway = persistenceGateway;
         this.mapper = mapper;
     }
 
     @Override
     public Customer execute(Customer customer) {
-        return customerPersistenceGateway.update(mapper.toCustomerEntityFrom(customer));
+        return persistenceGateway.update(mapper.toCustomerEntityFrom(customer));
     }
 }

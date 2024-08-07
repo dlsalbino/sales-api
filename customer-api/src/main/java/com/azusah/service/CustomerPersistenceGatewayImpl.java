@@ -38,4 +38,11 @@ public class CustomerPersistenceGatewayImpl implements CustomerPersistenceGatewa
 
         return mapper.toCustomerDomainFrom(repository.save(updated));
     }
+
+    @Override
+    public Customer findById(Long id) {
+        return repository.findById(id)
+                .map(mapper::toCustomerDomainFrom)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id=" + id + " not found."));
+    }
 }
