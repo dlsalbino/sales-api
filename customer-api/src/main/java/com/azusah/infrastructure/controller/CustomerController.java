@@ -8,6 +8,7 @@ import com.azusah.usecase.CreateCustomerUseCase;
 import com.azusah.usecase.DeleteCustomerUseCase;
 import com.azusah.usecase.RetrieveCustomerUseCase;
 import com.azusah.usecase.UpdateCustomerUseCase;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest customerRequest) {
         log.info("START :: Creating new customer flow: {}", customerRequest);
         Customer customer = createCustomerUseCase.execute(mapper.toCustomerDomainFrom(customerRequest));
         CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
