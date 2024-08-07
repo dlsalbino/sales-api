@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class CustomerMapper {
     public Customer toCustomerDomainFrom(CustomerRequest customerRequest) {
         return Customer.builder()
-                .id(customerRequest.getId())
                 .name(customerRequest.getName())
                 .purchaseLimitValue(customerRequest.getPurchaseLimitValue())
                 .invoiceClosingDay(customerRequest.getInvoiceClosingDay())

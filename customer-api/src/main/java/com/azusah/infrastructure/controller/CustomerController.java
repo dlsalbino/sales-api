@@ -36,12 +36,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest customerRequest) {
-        log.info("START :: Creating new customer flow: {}", customerRequest);
-        Customer customer = createCustomerUseCase.execute(mapper.toCustomerDomainFrom(customerRequest));
-        CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
-        log.info("FINISH :: Creating new customer flow: {}", customerResponse);
-        return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
+    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest request) {
+        log.info("START :: Creating new customer flow: {}", request);
+        Customer customer = createCustomerUseCase.execute(mapper.toCustomerDomainFrom(request));
+        CustomerResponse response = mapper.toCustomerResponseFrom(customer);
+        log.info("FINISH :: Creating new customer flow: {}", response);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -53,13 +53,13 @@ public class CustomerController {
         return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<CustomerResponse> update(@RequestBody CustomerRequest customerRequest) {
-        log.info("START :: Updating customer flow: {}", customerRequest);
-        Customer customer = updateCustomerUseCase.execute(mapper.toCustomerDomainFrom(customerRequest));
-        CustomerResponse customerResponse = mapper.toCustomerResponseFrom(customer);
-        log.info("FINISH :: Updating customer flow: {}", customerResponse);
-        return new ResponseEntity<>(customerResponse, HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody CustomerRequest request) {
+        log.info("START :: Update customer flow for id: {}", id);
+        Customer customer = updateCustomerUseCase.execute(id, mapper.toCustomerDomainFrom(request));
+        CustomerResponse response = mapper.toCustomerResponseFrom(customer);
+        log.info("FINISH :: Update customer flow: {}", response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

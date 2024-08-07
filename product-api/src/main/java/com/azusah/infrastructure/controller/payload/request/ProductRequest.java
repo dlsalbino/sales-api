@@ -9,8 +9,6 @@ import java.math.BigDecimal;
 
 public class ProductRequest {
 
-    private Long id;
-
     @NotNull(message = "Field 'description' is required.")
     @NotBlank(message = "Please type a valid value on field 'description'")
     @Size(min = 3, max = 100, message
@@ -21,15 +19,19 @@ public class ProductRequest {
     @PositiveOrZero(message = "The value must be greater than or equal 0.00")
     private BigDecimal price;
 
-    public Long getId() {
-        return id;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductRequest{" +
+                "description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

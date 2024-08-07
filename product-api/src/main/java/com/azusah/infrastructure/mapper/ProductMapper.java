@@ -27,7 +27,6 @@ public class ProductMapper {
 
     public Product toProductDomainFrom(ProductRequest request) {
         return Product.builder()
-                .id(request.getId())
                 .description(request.getDescription())
                 .price(request.getPrice())
                 .build();

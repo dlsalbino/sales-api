@@ -37,9 +37,10 @@ public class UpdateCustomerUseCaseTest {
     @DisplayName("Given an existent customer, should update it.")
     public void testUpdateCustomer() {
         //given
-        Customer customer = CustomerMock.getCustomerDomain(1L); //field invoiceClosingDay=20
-        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntity(1L));
-        when(customerPersistenceGateway.update(any(CustomerEntity.class)))
+        var customerId = 1L;
+        Customer customer = CustomerMock.getCustomerDomain(customerId); //here field invoiceClosingDay=20
+        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntity(customerId));
+        when(customerPersistenceGateway.update(any(Long.class), any(CustomerEntity.class)))
                 .thenReturn(Customer.builder()
                         .id(1L)
                         .name("Daniel")
@@ -48,7 +49,7 @@ public class UpdateCustomerUseCaseTest {
                         .build());
 
         //when
-        Customer customerActual = updateCustomerUseCase.execute(customer);
+        Customer customerActual = updateCustomerUseCase.execute(customerId, customer);
 
         //then
         assertThat(customerActual)
@@ -60,14 +61,15 @@ public class UpdateCustomerUseCaseTest {
     @DisplayName("Given a non existent customer, should throw an exception.")
     public void testUpdateCustomerNotFound() {
         //given
-        Customer customer = CustomerMock.getCustomerDomain(1L); //field invoiceClosingDay=20
-        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntity(1L));
-        when(customerPersistenceGateway.update(any(CustomerEntity.class)))
+        var customerId = 1L;
+        Customer customer = CustomerMock.getCustomerDomain(customerId); //field invoiceClosingDay=20
+        when(mapper.toCustomerEntityFrom(any(Customer.class))).thenReturn(CustomerMock.getCustomerEntity(customerId));
+        when(customerPersistenceGateway.update(any(Long.class), any(CustomerEntity.class)))
                 .thenThrow(new CustomerNotFoundException("Customer with id=1 not found."));
 
         //when | then
         assertThrows(CustomerNotFoundException.class,
-                () -> updateCustomerUseCase.execute(customer),
+                () -> updateCustomerUseCase.execute(customerId, customer),
                 "Customer with id=1 not found.");
     }
 }

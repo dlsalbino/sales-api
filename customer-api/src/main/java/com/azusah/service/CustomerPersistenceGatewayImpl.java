@@ -25,8 +25,8 @@ public class CustomerPersistenceGatewayImpl implements CustomerPersistenceGatewa
     }
 
     @Override
-    public Customer update(CustomerEntity customer) {
-        CustomerEntity customerEntity = repository.findById(customer.getId())
+    public Customer update(Long id, CustomerEntity customer) {
+        CustomerEntity customerEntity = repository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer with id=" + customer.getId() + " not found."));
 
         var updated = CustomerEntity.builder()

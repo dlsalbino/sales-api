@@ -18,7 +18,7 @@ public class UpdateCustomerUseCaseImpl implements UpdateCustomerUseCase {
     }
 
     @Override
-    public Customer execute(Customer customer) {
-        return persistenceGateway.update(mapper.toCustomerEntityFrom(customer));
+    public Customer execute(Long id, Customer customer) {
+        return persistenceGateway.update(id, mapper.toCustomerEntityFrom(customer));
     }
 }

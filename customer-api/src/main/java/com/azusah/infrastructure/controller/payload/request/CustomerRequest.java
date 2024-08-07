@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 
 public class CustomerRequest {
 
-    private Long id;
-
     @NotNull(message = "Field 'name' is required.")
     @NotBlank(message = "Please type a valid value on field 'name'")
     @Size(min = 3, max = 100, message
@@ -26,10 +24,6 @@ public class CustomerRequest {
     public CustomerRequest() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
@@ -45,8 +39,7 @@ public class CustomerRequest {
     @Override
     public String toString() {
         return "CustomerRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", purchaseLimitValue=" + purchaseLimitValue +
                 ", invoiceClosingDay=" + invoiceClosingDay +
                 '}';
