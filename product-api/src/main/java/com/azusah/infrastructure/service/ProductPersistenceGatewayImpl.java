@@ -33,12 +33,16 @@ public class ProductPersistenceGatewayImpl implements ProductPersistenceGateway 
     }
 
     @Override
-    public Product update(Product product) {
-        return null;
+    public Product update(Long id, Product product) {
+        Product retrieved = retrieve(id);
+        var updated = ProductEntity.builder().id(retrieved.getId())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .build();
+        return mapper.toProductDomainFrom(repository.save(updated));
     }
 
     @Override
     public void delete(Long id) {
-
     }
 }

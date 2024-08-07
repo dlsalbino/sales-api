@@ -55,4 +55,6 @@ public class RetrieveCustomerUseCaseTest {
                 () -> retrieveCustomerUseCase.execute(customerId),
                 "Customer with id=1 not found.");
     }
+
+
 }

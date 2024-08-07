@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateProductUseCaseImplTest {
+public class CreateProductUseCaseTest {
 
     @InjectMocks
     private CreateProductUseCaseImpl createProductUseCase;
