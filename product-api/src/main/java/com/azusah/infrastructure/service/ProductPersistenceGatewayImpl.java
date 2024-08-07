@@ -1,6 +1,7 @@
 package com.azusah.infrastructure.service;
 
 import com.azusah.domain.entity.Product;
+import com.azusah.domain.exception.ProductNotFoundException;
 import com.azusah.gateway.ProductPersistenceGateway;
 import com.azusah.infrastructure.mapper.ProductMapper;
 import com.azusah.repository.ProductRepository;
@@ -26,7 +27,9 @@ public class ProductPersistenceGatewayImpl implements ProductPersistenceGateway 
 
     @Override
     public Product retrieve(Long id) {
-        return null;
+        return repository.findById(id)
+                .map(mapper::toProductDomainFrom)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id=" + id + " not found."));
     }
 
     @Override
