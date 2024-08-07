@@ -5,19 +5,20 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class CustomerRequest {
+
     private Long id;
 
-    @NotNull(message = "The field 'name' is required.")
+    @NotNull(message = "Field 'name' is required.")
     @NotBlank(message = "Please type a valid value on field 'name'")
     @Size(min = 3, max = 100, message
             = "The field 'name' must be between 3 and 100 characters")
     private String name;
 
-    @NotNull(message = "The field 'purchaseLimitValue' is required.")
+    @NotNull(message = "Field 'purchaseLimitValue' is required.")
     @PositiveOrZero(message = "The value must be greater than or equal 0.00")
     private BigDecimal purchaseLimitValue;
 
-    @NotNull(message = "The field 'invoiceClosingDay' is required.")
+    @NotNull(message = "Field 'invoiceClosingDay' is required.")
     @Min(value = 1, message = "A day must be greater than or equal 1")
     @Max(value = 31, message = "A day must be less than or equal 31")
     private Integer invoiceClosingDay;

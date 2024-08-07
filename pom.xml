@@ -24,6 +24,7 @@
     </developers>
     <modules>
         <module>customer-api</module>
+        <module>product-api</module>
         <module>application</module>
     </modules>
     <scm>
