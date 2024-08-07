@@ -44,5 +44,7 @@ public class ProductPersistenceGatewayImpl implements ProductPersistenceGateway 
 
     @Override
     public void delete(Long id) {
+        Product retrieved = retrieve(id);
+        repository.delete(mapper.toProductEntityFrom(retrieved));
     }
 }

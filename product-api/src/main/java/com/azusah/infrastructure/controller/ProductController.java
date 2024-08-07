@@ -5,6 +5,7 @@ import com.azusah.infrastructure.controller.payload.request.ProductRequest;
 import com.azusah.infrastructure.controller.payload.response.ProductResponse;
 import com.azusah.infrastructure.mapper.ProductMapper;
 import com.azusah.usecase.CreateProductUseCase;
+import com.azusah.usecase.DeleteProductUseCase;
 import com.azusah.usecase.RetrieveProductUseCase;
 import com.azusah.usecase.UpdateProductUseCase;
 import jakarta.validation.Valid;
@@ -19,14 +20,16 @@ public class ProductController {
     private final CreateProductUseCase createProductUseCase;
     private final RetrieveProductUseCase retrieveProductUseCase;
     private final UpdateProductUseCase updateProductUseCase;
+    private final DeleteProductUseCase deleteProductUseCase;
     private final ProductMapper mapper;
 
     public ProductController(CreateProductUseCase createProductUseCase, RetrieveProductUseCase retrieveProductUseCase,
-                             UpdateProductUseCase updateProductUseCase,
+                             UpdateProductUseCase updateProductUseCase, DeleteProductUseCase deleteProductUseCase,
                              ProductMapper mapper) {
         this.createProductUseCase = createProductUseCase;
         this.retrieveProductUseCase = retrieveProductUseCase;
         this.updateProductUseCase = updateProductUseCase;
+        this.deleteProductUseCase = deleteProductUseCase;
         this.mapper = mapper;
     }
 
@@ -50,5 +53,11 @@ public class ProductController {
         Product product = updateProductUseCase.execute(id, mapper.toProductDomainFrom(productRequest));
         ProductResponse response = mapper.toProductResponseFrom(product);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        deleteProductUseCase.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
