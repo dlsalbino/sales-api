@@ -45,4 +45,9 @@ public class CustomerPersistenceGatewayImpl implements CustomerPersistenceGatewa
                 .map(mapper::toCustomerDomainFrom)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer with id=" + id + " not found."));
     }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(mapper.toCustomerEntityFrom(findById(id)));
+    }
 }

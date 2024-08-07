@@ -10,4 +10,6 @@ public interface CustomerPersistenceGateway {
     Customer update(CustomerEntity customer);
 
     Customer findById(Long id);
+
+    void delete(Long id);
 }
