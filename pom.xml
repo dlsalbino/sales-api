@@ -26,6 +26,7 @@
         <module>customer-api</module>
         <module>product-api</module>
         <module>application</module>
+        <module>sales-api</module>
     </modules>
     <scm>
         <connection/>

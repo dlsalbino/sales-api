@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>application</artifactId>
+    <artifactId>sales-api</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -27,12 +27,6 @@
         <dependency>
             <groupId>com.azusah</groupId>
             <artifactId>product-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.azusah</groupId>
-            <artifactId>sales-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

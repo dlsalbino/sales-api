@@ -1,8 +1,11 @@
 package com.azusah.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 @Entity
 @Table(name = "tbl_product", schema = "product")
@@ -17,6 +20,14 @@ public class ProductEntity {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private Instant createdAt;
+
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    private Instant updatedAt;
 
     public ProductEntity() {
     }
@@ -41,6 +52,14 @@ public class ProductEntity {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 
     @Override

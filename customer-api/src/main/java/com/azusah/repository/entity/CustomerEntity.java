@@ -3,6 +3,7 @@ package com.azusah.repository.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "tbl_customer", schema = "customer")
@@ -20,6 +21,10 @@ public class CustomerEntity {
 
     @Column(name = "invoice_closing_day")
     private Integer invoiceClosingDay;
+
+    @Column(name = "orders")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<OrderEntity> orders;
 
     public CustomerEntity() {
     }
